@@ -26,6 +26,22 @@ class LinkedList:
             self.tail = node
             temp.next = self.tail
         self.size += 1
+
+    def pop(self):
+        if self.head is None:
+            return None
+        if self.head.next is None:
+            value = self.head.value
+            self.head = None
+            return value
+        prev = None
+        current = self.head
+        while current.next:
+            prev = current
+            current = current.next
+        prev.next = None
+        return current.value
+
     
     def print_list_of_item(self):
         current = self.head
@@ -46,6 +62,7 @@ class LinkedList:
 li = LinkedList()
 
 item = [1,2,3,4,5]
+# item = [1]
 
 for num in item:
     li.insert(num)
@@ -53,6 +70,9 @@ for num in item:
 
 li.print_list_of_item()
 
+print('pop:',li.pop())
+print('after pop:')
+li.print_list_of_item()
 print('search item 6:', li.search(6))
 print('search item 3:', li.search(3))
 
