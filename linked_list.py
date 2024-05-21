@@ -77,3 +77,11 @@ print('search item 6:', li.search(6))
 print('search item 3:', li.search(3))
 
 
+
+
+
+
+
+
+
+
