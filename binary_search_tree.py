@@ -64,24 +64,46 @@ class Tree:
             res.append(current.val)
             current = current.right
         return res
+    
+    def postorder_traversal_two_stack(self):
+        res = []
+        stack1 = [self.root]
+        stack2 = []
 
+        while stack1:
+            node = stack1.pop()
+            if node:
+                stack2.append(node)
+
+                if node.left:
+                    stack1.append(node.left)
+                if node.right:
+                    stack1.append(node.right)
+        
+
+        while stack2:
+            node = stack2.pop()
+            res.append(node.val)
+        
+        return res
 
 
 tree = Tree()
 
-# tree.insert(10)
-# tree.insert(5)
-# tree.insert(15)
-# tree.insert(3)
-# tree.insert(7)
-# tree.insert(18)
-
-tree.insert(1)
-tree.insert(2)
-tree.insert(3)
-tree.insert(4)
+tree.insert(10)
 tree.insert(5)
-tree.insert(6)
+tree.insert(15)
+tree.insert(3)
+tree.insert(7)
+tree.insert(18)
+
+# tree.insert(1)
+# tree.insert(2)
+# tree.insert(3)
+# tree.insert(4)
+# tree.insert(5)
+# tree.insert(6)
 
 print('preorder traversal:',tree.preorder_traversal_stack())
 print('inorder traversal:', tree.inorder_traversal_stack())
+print('postorder traversal:', tree.postorder_traversal_two_stack())
