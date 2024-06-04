@@ -88,14 +88,58 @@ class Tree:
         return res
 
 
+
+    def inorder_traversal_recursion(self):
+        res = []
+
+        def traversal(node):
+            if node:
+                traversal(node.left)
+                res.append(node.val)
+                traversal(node.right)
+        
+        traversal(self.root)
+        return res
+    
+    def preorder_traversal_recursion(self):
+        res = []
+
+        def traversal(node):
+            if node:
+                res.append(node.val)
+                traversal(node.left)
+                traversal(node.right)
+        traversal(self.root)
+
+        return res
+    
+    def postorder_traversal_recursion(self):
+        res = []
+
+        def traversal(node):
+            if node:
+                traversal(node.left)
+                traversal(node.right)
+                res.append(node.val)
+        traversal(self.root)
+        return res
+    
+
 tree = Tree()
 
-tree.insert(10)
-tree.insert(5)
-tree.insert(15)
-tree.insert(3)
+# tree.insert(10)
+# tree.insert(5)
+# tree.insert(15)
+# tree.insert(3)
+# tree.insert(7)
+# tree.insert(18)
+
+tree.insert(17)
 tree.insert(7)
-tree.insert(18)
+tree.insert(23)
+tree.insert(1)
+tree.insert(12)
+tree.insert(19)
 
 # tree.insert(1)
 # tree.insert(2)
@@ -104,6 +148,13 @@ tree.insert(18)
 # tree.insert(5)
 # tree.insert(6)
 
-print('preorder traversal:',tree.preorder_traversal_stack())
-print('inorder traversal:', tree.inorder_traversal_stack())
-print('postorder traversal:', tree.postorder_traversal_two_stack())
+print('preorder traversal stack:',tree.preorder_traversal_stack())
+print('inorder traversal stack:', tree.inorder_traversal_stack())
+print('postorder traversal two stack:', tree.postorder_traversal_two_stack())
+
+
+print('preordertraversal using recursion:', tree.preorder_traversal_recursion())
+print('inorder traversal using recursion:', tree.inorder_traversal_recursion())
+print('postorder traversal using recursion:', tree.postorder_traversal_recursion())
+
+
