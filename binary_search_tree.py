@@ -125,6 +125,9 @@ class Tree:
         return res
     
 
+
+    
+
 tree = Tree()
 
 # tree.insert(10)
