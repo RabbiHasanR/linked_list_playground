@@ -123,6 +123,37 @@ class Tree:
                 res.append(node.val)
         traversal(self.root)
         return res
+
+    def delete_node(self, key):
+
+
+        def delete(root, key):
+            if root is None:
+                return root
+            
+            if key > root.val:
+                root.right = delete(root.right, key)
+            elif key < root.val:
+                root.left = delete(root.left, key)
+            
+            else:
+                if root.left is None:
+                    return root.right
+                elif root.right is None:
+                    return root.left
+                
+
+                # find the min from right subtree
+
+                curr = root.right
+                while curr.left:
+                    curr = curr.left
+                root.val = curr.val
+                root.right = delete(root.right, root.val)
+
+            return root
+
+        return delete(self.root, key)
     
 
 
@@ -159,5 +190,10 @@ print('postorder traversal two stack:', tree.postorder_traversal_two_stack())
 print('preordertraversal using recursion:', tree.preorder_traversal_recursion())
 print('inorder traversal using recursion:', tree.inorder_traversal_recursion())
 print('postorder traversal using recursion:', tree.postorder_traversal_recursion())
+
+
+root = tree.delete_node(7)
+
+print('after delete preorder traversal stack:',tree.preorder_traversal_stack())
 
 
