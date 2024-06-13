@@ -156,28 +156,50 @@ class Tree:
         return delete(self.root, key)
     
     
-    def rootToLeaf(self):
-        path = []
-        index = 0
+    # def rootToLeaf(self):
+    #     path = []
+    #     index = 0
 
-        def printRootToLeaf(node, path, index):
-            if node is None:
-                return
+    #     def printRootToLeaf(node, path, index):
+    #         if node is None:
+    #             return
             
-            if index == len(path):
-                path.append(node.val)
-            else:
-                print('index:', index, len(path))
-                path[index] = node.val
+    #         if index == len(path):
+    #             path.append(node.val)
+    #         else:
+    #             print('index:', index, len(path))
+    #             path[index] = node.val
             
-            if node.left is None and node.right is None:
-                print('path:', path)
+    #         if node.left is None and node.right is None:
+    #             print('path:', path)
                 
             
-            printRootToLeaf(node.left, path, index + 1)
-            printRootToLeaf(node.right, path, index + 1)
+    #         printRootToLeaf(node.left, path, index + 1)
+    #         printRootToLeaf(node.right, path, index + 1)
         
-        printRootToLeaf(self.root, path, index)
+    #     printRootToLeaf(self.root, path, index)
+    
+    
+    def find_paths_using_preorder(self):
+        
+        def rootToLeaf(node, current_path, all_paths):
+            if not node:
+                return
+            
+            current_path.append(node.val)
+            
+            if not node.left and not node.right:
+                all_paths.append(list(current_path))
+            else:
+                rootToLeaf(node.left, current_path, all_paths)
+                rootToLeaf(node.right, current_path, all_paths)
+            
+            current_path.pop()
+        
+        find_paths = []
+        rootToLeaf(self.root, [], find_paths)
+        
+        return find_paths
         
         
     
@@ -225,6 +247,8 @@ print('after delete preorder traversal stack:',tree.preorder_traversal_stack())
 
 print('print all root to path')
 
-tree.rootToLeaf()
+# tree.rootToLeaf()
+
+print(tree.find_paths_using_preorder())
 
 
