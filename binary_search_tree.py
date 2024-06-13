@@ -155,6 +155,32 @@ class Tree:
 
         return delete(self.root, key)
     
+    
+    def rootToLeaf(self):
+        path = []
+        index = 0
+
+        def printRootToLeaf(node, path, index):
+            if node is None:
+                return
+            
+            if index == len(path):
+                path.append(node.val)
+            else:
+                print('index:', index, len(path))
+                path[index] = node.val
+            
+            if node.left is None and node.right is None:
+                print('path:', path)
+                
+            
+            printRootToLeaf(node.left, path, index + 1)
+            printRootToLeaf(node.right, path, index + 1)
+        
+        printRootToLeaf(self.root, path, index)
+        
+        
+    
 
 
     
@@ -195,5 +221,10 @@ print('postorder traversal using recursion:', tree.postorder_traversal_recursion
 root = tree.delete_node(7)
 
 print('after delete preorder traversal stack:',tree.preorder_traversal_stack())
+
+
+print('print all root to path')
+
+tree.rootToLeaf()
 
 
