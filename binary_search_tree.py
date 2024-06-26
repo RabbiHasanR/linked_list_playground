@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, val):
         self.val = val
@@ -217,6 +220,44 @@ class Tree:
         return max_depth(self.root)
     
     
+    def max_depth_with_stack(self):
+        if self.root is None:
+            return 0
+        
+        stack = [(self.root, 1)]
+        max_depth = 0
+        
+        while stack:
+            node, depth = stack.pop()
+            
+            if node:
+                max_depth = max(max_depth, depth)
+                stack.append((node.left, depth + 1))
+                stack.append((node.right, depth + 1))
+        return max_depth
+    
+    
+    
+    def max_depth_with_queue(self):
+        if self.root is None:
+            return 0
+        
+        q = deque()
+        q.append((self.root, 1))
+        max_depth = 0
+        
+        while q:
+            node, depth = q.popleft()
+            
+            if node:
+                max_depth = max(max_depth, depth)
+                
+                q.append((node.left, depth + 1))
+                q.append((node.right, depth + 1))
+        
+        return max_depth
+    
+    
     
         
         
@@ -269,6 +310,8 @@ print('print all root to path')
 
 print(tree.find_paths_using_preorder())
 
-print('Max depth:', tree.max_depth_recursion())
+print('Max depth with recursion:', tree.max_depth_recursion())
+print('Max depth with stack:', tree.max_depth_with_stack())
+print('Max depth with queue:', tree.max_depth_with_queue())
 
 
